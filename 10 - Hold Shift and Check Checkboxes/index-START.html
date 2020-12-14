@@ -96,6 +96,54 @@
   </div>
 
 <script>
+  // let haveChecked = false;
+  // function findFirstChecked() {
+    // const items = document.querySelectorAll('.item > input');
+    // const arr = [...items];
+    // if(haveChecked === true) {
+    //   const firstChecked = arr.findIndex(item => item.checked);
+    //   const lastChecked = arr.slice(firstChecked + 1).findIndex(item => item.checked) + 2;
+    //   if(lastChecked > arr.length) {
+    //     lastChecked = arr.length;
+    //   }
+    //   console.log(firstChecked);
+    //   console.log(lastChecked);
+    // } else {
+    //   const checker = arr.find(item => item.checked);
+    //   console.log(checker);
+    //   checker ? haveChecked = true : haveChecked = false;
+    //   console.log(haveChecked);
+    // }
+  // }
+
+  // function checkInBetween() {
+  // }
+
+  // document.addEventListener('keydown', e => {
+  //   if(e.keyCode === 16) {
+  //     // do something
+  //   }
+  // });
+
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  let lastChecked;
+
+  function handleCheck(e) {
+    let inBetween = false;
+    if(e.shiftKey && this.checked) {
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === lastChecked) {
+          inBetween = !inBetween;
+        }
+        if(inBetween) {
+          checkbox.checked = true;
+        }
+      })
+    }
+    lastChecked = this;
+  }
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 </script>
 </body>
 </html>
